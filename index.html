@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Kids Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffeb3b;
+            text-align: center;
+            color: #4caf50;
+        }
+
+        h1 {
+            color: #ff5722;
+            font-size: 3em;
+        }
+
+        h2 {
+            color: #3f51b5;
+        }
+
+        .button {
+            background-color: #8bc34a;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .button:hover {
+            background-color: #66bb6a;
+        }
+
+        .game-box {
+            background-color: #ff9800;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        #score {
+            font-size: 1.5em;
+            color: #f44336;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.8em;
+            color: #757575;
+        }
+
+        footer a {
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Fun Kids Website!</h1>
+    <h2>Let's have some fun learning!</h2>
+
+    <p>Click on the button below to start a little game!</p>
+
+    <button class="button" onclick="startGame()">Start Game</button>
+
+    <div class="game-box" id="gameBox" style="display:none;">
+        <h3>Guess the Number Game!</h3>
+        <p>Pick a number between 1 and 10:</p>
+        <input type="number" id="guess" min="1" max="10" />
+        <button class="button" onclick="checkGuess()">Submit Guess</button>
+
+        <p id="message"></p>
+        <p id="score"></p>
+    </div>
+
+    <footer>
+        <p>Created with ❤️ by Your Name</p>
+        <p>Visit <a href="https://www.kidsfun.com">KidsFun.com</a> for more games!</p>
+    </footer>
+
+    <script>
+        let secretNumber;
+        let attempts = 0;
+
+        function startGame() {
+            secretNumber = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('gameBox').style.display = 'block';
+            document.getElementById('message').textContent = '';
+            document.getElementById('score').textContent = '';
+            attempts = 0;
+        }
+
+        function checkGuess() {
+            const userGuess = document.getElementById('guess').value;
+            attempts++;
+            if (userGuess == secretNumber) {
+                document.getElementById('message').textContent = `Congratulations! You guessed the number in ${attempts} attempt(s)! 🎉`;
+                document.getElementById('score').textContent = `Score: ${attempts} attempts`;
+                document.getElementById('guess').disabled = true;
+            } else if (userGuess < secretNumber) {
+                document.getElementById('message').textContent = "Too low! Try again!";
+            } else if (userGuess > secretNumber) {
+                document.getElementById('message').textContent = "Too high! Try again!";
+            }
+        }
+    </script>
+
+</body>
+</html>
